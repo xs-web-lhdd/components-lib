@@ -4,6 +4,7 @@
  */
 
 const Ajv = require("ajv")
+const localize = require("ajv-i18n")
 const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
 
 // ajv.addFormat('test', (data) => {
@@ -12,14 +13,20 @@ const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
 // })
 
 ajv.addKeyword('test', {
-  // validate: function (schema, data) {
-  //   console.log(schema, data, '----------');
-  //   if (schema === true) {
-  //     return true
-  //   } else {
-  //     return schema.length === 6
-  //   }
-  // }
+  validate: function fun(schema, data) {
+
+    fun.errors = [{
+      keyword: 'test',
+      dataPath: '.name',
+      schemaPath: '#/properties/name/test',
+      params: {
+        keyword: 'test'
+      },
+      message: '这是自定义的错误信息！'
+    }]
+    // console.log(schema, data, '----------');
+    return false
+  },
   // compile(schema, parentSchema) {
   //   console.log(schema, parentSchema);
   //   return () => true
@@ -27,11 +34,11 @@ ajv.addKeyword('test', {
   // metaSchema: {
   //   type: 'boolean'
   // },
-  macro: function (schema, parentSchema) {
-    return {
-      minLength: 10
-    }
-  }
+  // macro: function (schema, parentSchema) {
+  //   return {
+  //     minLength: 10
+  //   }
+  // }
 })
 
 const schema = {
@@ -68,4 +75,7 @@ const data = {
 const validate = ajv.compile(schema)
 
 const valid = validate(data)
-if (!valid) console.log(validate.errors)
+if (!valid) {
+  localize.zh(validate.errors)
+  console.log(validate.errors)
+}
