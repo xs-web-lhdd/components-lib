@@ -15,6 +15,7 @@
     "core-js": "^3.6.5",
     "jss": "^10.8.0",
     "jss-preset-default": "^10.8.0",
+    "monaco-editor-webpack-plugin": "^4.2.0",
     "vue": "^3.0.0",
     "vue-jss": "^0.0.4"
   },

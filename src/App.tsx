@@ -3,6 +3,7 @@ import { defineComponent, Ref, ref, reactive, watchEffect } from 'vue'
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import demos from './demos'
+import SchemaForm from '../lib/index'
 
 // TODO: 在 lib 中 export
 type Schema = any
@@ -176,7 +177,11 @@ export default defineComponent({
               </div>
             </div>
             <div class={classes.form}>
-              {/* <SchemaForm /> */}
+              <SchemaForm
+                schema={demo.schema}
+                onChange={handleChange}
+                value={demo.data}
+              />
               <div>这是右侧</div>
               {
                 //
