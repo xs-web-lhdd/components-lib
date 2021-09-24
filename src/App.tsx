@@ -93,8 +93,7 @@ export default defineComponent({
 
     watchEffect(() => {
       const index = selectedRef.value
-      // const d = demos[index]
-      const d = demos
+      const d = demos[index]
       demo.schema = d.schema
       demo.data = d.default
       demo.uiSchema = d.uiSchema
@@ -139,18 +138,19 @@ export default defineComponent({
           <div class={classes.menu}>
             <h1>Vue3 JsonSchema Form</h1>
             <div>
-              {
-                // demos.map((demo, index) => {
-                //   <button class={{
-                //     [classes.menuButton]: true,
-                //     [classes.menuSelected]: index === selectedRef
-                //   }}
-                //   onClick={() => selectedRef.value = index}
-                //   >
-                //     {demo.name}
-                //   </button>
-                // })
-              }
+              {demos.map((demo, index) => {
+                return (
+                  <button
+                    class={{
+                      [classes.menuButton]: true,
+                      [classes.menuSelected]: index === selectedRef.value,
+                    }}
+                    onClick={() => (selectedRef.value = index)}
+                  >
+                    {demo.name}
+                  </button>
+                )
+              })}
             </div>
           </div>
           <div class={classes.content}>
