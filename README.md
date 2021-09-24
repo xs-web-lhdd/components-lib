@@ -306,3 +306,64 @@ const PropType = {
 
 这时 config 的类型就是 Config
 原因是 props 是 readonly 的类型，但 props 定义一旦提取出来之后 TS 就无法识别是 readonly 的类型，所以 TS 进行判断时就会有 undefined，当在后面加上 as const 后就说明它是只读的类型，因此 TS 就可去掉 undefined 这种类型推测，其实这点在 vue3 源码中 apiDefineComponent.ts 也有提到，第 162 163 行
+
+##### h 函数：
+
+h 函数跟 React 中的 createElement 很类似，都是创建虚拟 DOM，要理清楚的是我们在 vue 的 SFC 中的 template 写的不是真正的 HTML 而是 h 函数，h 函数其实是对调用 createVNode 做了一个判断，根据不同的参数调用不同的 createVNode，下面是源码：
+
+```ts
+// Actual implementation
+export function h(type: any, propsOrChildren?: any, children?: any): VNode {
+  const l = arguments.length
+  if (l === 2) {
+    if (isObject(propsOrChildren) && !isArray(propsOrChildren)) {
+      // single vnode without props
+      if (isVNode(propsOrChildren)) {
+        return createVNode(type, null, [propsOrChildren])
+      }
+      // props without children
+      return createVNode(type, propsOrChildren)
+    } else {
+      // omit props
+      return createVNode(type, null, propsOrChildren)
+    }
+  } else {
+    if (l > 3) {
+      children = Array.prototype.slice.call(arguments, 2)
+    } else if (l === 3 && isVNode(children)) {
+      children = [children]
+    }
+    return createVNode(type, propsOrChildren, children)
+  }
+}
+```
+
+##### 使用 JSX 开发组件：
+
+安装：
+
+```bash
+yarn add @vue/babel-plugin-jsx -D
+```
+
+在 babel 中进行配置：
+
+```babel
+plugins: ['@vue/babel-plugin-jsx']
+```
+
+官方介绍：
+https://github.com/vuejs/jsx-next
+
+##### 安装 monaco-editor：
+
+```bash
+yarn add monaco-editor -D
+```
+
+在 js 中写 css:
+安装：
+
+```bash
+yarn add vue-jss -S
+```
