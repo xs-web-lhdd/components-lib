@@ -29,3 +29,19 @@ export interface Schema {
   oneOf?: Schema[]
   required?: string[]
 }
+
+import { PropType } from 'vue'
+// 将公用的 props 定义提取出来
+export const FieldPropsDefine = {
+  schema: {
+    type: Object as PropType<Schema>,
+    required: true,
+  },
+  value: {
+    required: true,
+  },
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+} as const
