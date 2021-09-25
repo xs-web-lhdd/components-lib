@@ -2,9 +2,10 @@ import { defineComponent, PropType } from 'vue'
 
 import { Schema, SchemaTypes } from './types'
 
-// import StringField from './fields/StringField'
-import StringField from './fields/StringField.vue'
-import NumberField from './fields/NumberField'
+import StringField from './fields/StringField'
+// import StringField from './fields/StringField.vue'
+// import NumberField from './fields/NumberField'
+import NumberField from './fields/NumberField.vue'
 
 export default defineComponent({
   name: 'SchemaItem',
@@ -28,6 +29,7 @@ export default defineComponent({
       // TODO: 如果type没有指定，我们需要猜测type
 
       const type = schema.type
+      console.log(type)
 
       let Component: any
 

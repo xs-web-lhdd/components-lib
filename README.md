@@ -367,3 +367,18 @@ yarn add monaco-editor -D
 ```bash
 yarn add vue-jss -S
 ```
+##### 结局 monaco-editor 报错问题：
+在 vue.config.js 中：
+```js
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+
+module.exports = {
+  chainWebpack(config) {
+    config.plugin('monaco').use(new MonacoWebpackPlugin())
+  },
+}
+```
+使用前记得安装 monaco-editor-webpack-plugin 依赖：
+```bash
+yarn add monaco-editor-webpack-plugin
+```

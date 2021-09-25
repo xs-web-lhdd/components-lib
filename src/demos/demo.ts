@@ -6,7 +6,7 @@
 export default {
   name: 'Demo',
   schema: {
-    type: 'string',
+    type: 'number',
   },
   uiSchema: {
     type: 'number',

@@ -2,16 +2,16 @@
   <input type="text" :value="value" :onChange="handleChange" />
 </template>
 
-<script setup lang="ts">
-import { FieldPropsDefine, Schema } from '../types'
+<script lang="ts">
+import { FieldPropsDefine } from '../types'
 export default {
   props: FieldPropsDefine,
 }
 
 declare const props: {
   value: any
-  onChange: (v: any) => void
-  schema: Schema
+  onChange: (v: string) => void
+  // schema: Schema
 }
 export const handleChange = (e: any) => {
   console.log(e)
